@@ -1,0 +1,17 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  become: true
+  tasks:
+  - name: Install apache packages 
+    yum:
+      name: httpd
+      state: present
+  - name: ensure httpd is running
+    service:
+      name: httpd 
+      state: started
+  - name: git repo
+    git:
+     repo: 'https://github.com/naveenreddy2205/ecomm.git'
+     dest: /var/www/html
