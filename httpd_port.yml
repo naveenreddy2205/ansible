@@ -1,0 +1,20 @@
+---
+- name: This sets up an httpd webserver
+  hosts: web
+  become: true
+  tasks:
+
+  - name: Put SELinux in permissive mode, logging actions that would be blocked.
+    selinux:
+     policy: targeted
+     state: permissive
+
+  - name: Install apache packages 
+    copy:
+     src: /home/centos/httpd.conf
+     dest: /etc/httpd/conf/httpd.conf
+
+  - name: Restart service httpd, in all cases
+    service:
+     name: httpd
+     state: restarted
