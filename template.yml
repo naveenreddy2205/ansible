@@ -51,3 +51,9 @@
     copy:
      src: static.html
      dest: /var/www/html/static.html
+
+# template file
+  - name: template file
+    template:
+     src: dynamic.j2
+     dest: /var/www/html/dynamic.html

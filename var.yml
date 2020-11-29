@@ -2,7 +2,16 @@
 - name: This sets up an httpd webserver
   hosts: all
   become: true
+  vars:
+    username: naveen
+    httpd_port: 80
   tasks:
+# set selinux permisive mode
+  - name: Put SELinux in permissive mode, logging actions that would be blocked.
+    selinux:
+     policy: targeted
+     state: permissive
+    when:  ansible_os_family ==  "RedHat"
 # INstall Apache in CENTOS mechine
   - name: Install httpd centos
     package:
@@ -51,3 +60,25 @@
     copy:
      src: static.html
      dest: /var/www/html/static.html
+
+# template file
+  - name: template file
+    template:
+     src: dynamic.j2
+     dest: /var/www/html/dynamic.html
+
+# cinfiguration file template file
+  - name: configuration file
+    template:
+     src: httpd.j2
+     dest: /etc/httpd/conf/httpd.conf
+    when:  ansible_os_family ==  "RedHat"
+    notify:
+      - Restart service httpd 
+  
+  handlers:
+  - name: Restart service httpd
+    service:
+     name: httpd
+     state: restarted
+    when:  ansible_os_family ==  "RedHat"
