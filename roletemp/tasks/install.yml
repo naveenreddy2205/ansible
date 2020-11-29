@@ -1,0 +1,23 @@
+---
+# set selinux permisive mode
+  - name: Put SELinux in permissive mode, logging actions that would be blocked.
+    selinux:
+     policy: targeted
+     state: permissive
+    when:  ansible_os_family ==  "RedHat"
+# INstall Apache in CENTOS mechine
+  - name: Install httpd centos
+    package:
+      name: httpd
+      state: present
+    when:  ansible_os_family ==  "RedHat"
+# Intall Apache in Ubunutu mechine
+  - name: Install apache Ubuntu
+    package:
+      name: apache2
+      state: present
+    when:  ansible_os_family ==  "Debian"
+
+
+
+

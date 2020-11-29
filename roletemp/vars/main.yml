@@ -1,2 +1,4 @@
 ---
 # vars file for roletemp
+  username: naveen
+  httpd_port: 80

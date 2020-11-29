@@ -1,0 +1,17 @@
+---
+# start Httpd
+  - name: ensure httpd is running
+    service:
+      name: httpd 
+      state: started
+      enabled: yes
+    when:  ansible_os_family ==  "RedHat"
+
+# start Apache2
+  - name: ensure Apache is running
+    service:
+      name: apache2 
+      state: started
+      enabled: yes
+    when:  ansible_os_family ==  "Debian"
+

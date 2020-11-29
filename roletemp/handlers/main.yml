@@ -1,2 +1,7 @@
 ---
 # handlers file for roletemp
+  - name: Restart service httpd
+    service:
+     name: httpd
+     state: restarted
+    when:  ansible_os_family ==  "RedHat"

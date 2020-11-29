@@ -1,0 +1,6 @@
+---
+- name: This sets up an httpd webserver
+  hosts: all
+  become: true
+  roles: 
+   - ../roletemp
